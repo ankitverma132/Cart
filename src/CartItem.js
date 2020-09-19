@@ -14,7 +14,7 @@ class CartItem extends React.Component{
             img : ''
         }
         //Another way
-        this.increaseQuantity = this.increaseQuantity.bind(this);
+        //this.increaseQuantity = this.increaseQuantity.bind(this);
     }
     // increaseQuantity(){
     //     //console.log('Test');
@@ -29,6 +29,26 @@ class CartItem extends React.Component{
         // It will throw an error because this is undefined here
         //console.log('this.state',this.state);
         console.log('this.state', this.state);
+        //It will update state but would not trigger UI update
+        //this.state.qty += 1;
+
+        //setState form-1
+        // this.setState({
+        //     qty : this.state.qty + 1
+        // })
+        //setState form-2 (If previousState require you should use form-2)
+        this.setState((prevState) => {
+            return{
+                qty : prevState.qty + 1
+            }
+        });
+    }
+    decreaseQuantity = () =>{
+        this.setState((prevState) => {
+            return{
+                qty : prevState.qty - 1
+            }
+        });
     }
     render(){
         // Using object destructuring
@@ -51,7 +71,9 @@ class CartItem extends React.Component{
                         onClick = {this.increaseQuantity}
                         />
                         <img alt = "decrease" className = "action-icons" 
-                        src = "https://www.flaticon.com/premium-icon/icons/svg/2985/2985073.svg" />
+                        src = "https://www.flaticon.com/premium-icon/icons/svg/2985/2985073.svg"
+                        onClick = {this.decreaseQuantity}
+                        />
                         <img alt = "delete" className = "action-icons" 
                         src = "https://www.flaticon.com/premium-icon/icons/svg/2907/2907762.svg" />
                     </div>
