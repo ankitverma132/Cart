@@ -5,18 +5,18 @@ import React from 'react';
 
 class CartItem extends React.Component{
     // Adding state to a component
-    constructor(){
-        super();
-       this.state = {
-            price : 999,
-            title : 'Mobile phone',
-            qty : 1,
-            img : ''
-        }
-        //Another way
-        //this.increaseQuantity = this.increaseQuantity.bind(this);
-       // this.testing();
-    }
+    // constructor(){
+    //     super();
+    //    this.state = {
+    //         price : 999,
+    //         title : 'Mobile phone',
+    //         qty : 1,
+    //         img : ''
+    //     }
+    //     //Another way
+    //     //this.increaseQuantity = this.increaseQuantity.bind(this);
+    //    // this.testing();
+    // }
 
     // testing(){
     //     const promise = new Promise((resolve,reject) => {
@@ -62,7 +62,7 @@ class CartItem extends React.Component{
             return{
                 qty : prevState.qty + 1
             }
-        // },() => {
+        // },() => { 
         //     //we can pass this second callback function in case of performing some
         //     //action after setState() has executed as setState is async function  
         //     console.log('this.state',this.state);
@@ -83,11 +83,15 @@ class CartItem extends React.Component{
         });
     }
     render(){
-        console.log("render");
+       // console.log("render");
+        console.log('this.props',this.props);
         // Using object destructuring
-        const {price, title, qty} = this.state;
+        // const {price, title, qty} = this.state;
+        //const {price, title, qty} = this.props;
+        const {price, title, qty} = this.props.product;
         return(
             <div className = "cart-item">
+                {this.props.jsx}
                 <div className = "left-block">
                     <img style = {styles.image} />
                 </div>
