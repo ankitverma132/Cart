@@ -36,6 +36,33 @@ class Cart extends React.Component{
         //this.increaseQuantity = this.increaseQuantity.bind(this);
        // this.testing();
     }
+    //we will create a function and sent it as props and whenever qty will
+    //change that func would be called and change state in cart component
+    handleIncreaseQuantity = (product) => {
+        console.log('Hey plz increase quantity of', product);
+        const {products} = this.state;
+        //We need to get index of that product as we will change qty of that product only
+        const index = products.indexOf(product);
+        products[index].qty += 1;
+
+        this.setState({
+            products : products
+            //we can also just write products
+        })
+    }
+    handleDecreaseQuantity = (product) => {
+        console.log('Hey plz decrease quantity of', product);
+        const {products} = this.state;
+        //We need to get index of that product as we will change qty of that product only
+        const index = products.indexOf(product);
+        products[index].qty -= 1;
+
+        this.setState({
+            products : products
+            //we can also just write products
+        })
+    }
+
     render(){
         //const arr = [1,2,3,4,5];
         //Destructuring
@@ -51,6 +78,8 @@ class Cart extends React.Component{
                          <CartItem 
                              product = {product} 
                              key={product.id}
+                             onIncreaseQuantity = {this.handleIncreaseQuantity}
+                             onDecreaseQuantity = {this.handleDecreaseQuantity}
                             //  func={() => console.log("Something")}
                             //  isLoggedin={false}
                             //  jsx={<h1>Test</h1>}
