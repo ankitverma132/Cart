@@ -63,6 +63,16 @@ class Cart extends React.Component{
         })
     }
 
+    handleDeleteProduct = (id) => {
+        const {products} = this.state;
+        //It will return an other array that will contain 
+        //whose id is not equal to given id
+        const items = products.filter((item) => item.id !== id );
+        this.setState({
+            products : items
+        })
+    }
+
     render(){
         //const arr = [1,2,3,4,5];
         //Destructuring
@@ -80,6 +90,7 @@ class Cart extends React.Component{
                              key={product.id}
                              onIncreaseQuantity = {this.handleIncreaseQuantity}
                              onDecreaseQuantity = {this.handleDecreaseQuantity}
+                             onDeleteProduct = {this.handleDeleteProduct}
                             //  func={() => console.log("Something")}
                             //  isLoggedin={false}
                             //  jsx={<h1>Test</h1>}
