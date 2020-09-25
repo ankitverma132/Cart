@@ -3,7 +3,10 @@ import React from 'react';
 //creating class based component here
 //While creating class based you need to use render() function
 
-class CartItem extends React.Component{
+//class CartItem extends React.Component{
+//Convert this component into functional component
+//React will pass props at runtime
+const CartItem = (props) =>  {    
     // Adding state to a component
     // constructor(){
     //     super();
@@ -45,54 +48,54 @@ class CartItem extends React.Component{
     // }
     //Another way using arrow function
     //It will bind value of this to instant of CartItem
-    increaseQuantity = () =>{
-        //console.log('Test');
-        // It will throw an error because this is undefined here
-        //console.log('this.state',this.state);
-        //console.log('this.state', this.state);
-        //It will update state but would not trigger UI update
-        //this.state.qty += 1;
+    // increaseQuantity = () =>{
+    //     //console.log('Test');
+    //     // It will throw an error because this is undefined here
+    //     //console.log('this.state',this.state);
+    //     //console.log('this.state', this.state);
+    //     //It will update state but would not trigger UI update
+    //     //this.state.qty += 1;
 
-        //setState form-1
-        // this.setState({
-        //     qty : this.state.qty + 1
-        // })
-        //setState form-2 (If previousState require you should use form-2)
-        this.setState((prevState) => {
-            return{
-                qty : prevState.qty + 1
-            }
-        // },() => { 
-        //     //we can pass this second callback function in case of performing some
-        //     //action after setState() has executed as setState is async function  
-        //     console.log('this.state',this.state);
-        });
-    }
-    decreaseQuantity = () =>{
-        //Putting a check that if qty is 0
-        //don't decrease it
-        //Using destructuring
-        const {qty} = this.state;
-        if(qty == 0){
-            return;
-        }
-        this.setState((prevState) => {
-            return{
-                qty : prevState.qty - 1
-            }
-        });
-    }
-    render(){
+    //     //setState form-1
+    //     // this.setState({
+    //     //     qty : this.state.qty + 1
+    //     // })
+    //     //setState form-2 (If previousState require you should use form-2)
+    //     this.setState((prevState) => {
+    //         return{
+    //             qty : prevState.qty + 1
+    //         }
+    //     // },() => { 
+    //     //     //we can pass this second callback function in case of performing some
+    //     //     //action after setState() has executed as setState is async function  
+    //     //     console.log('this.state',this.state);
+    //     });
+    // }
+    // decreaseQuantity = () =>{
+    //     //Putting a check that if qty is 0
+    //     //don't decrease it
+    //     //Using destructuring
+    //     const {qty} = this.state;
+    //     if(qty == 0){
+    //         return;
+    //     }
+    //     this.setState((prevState) => {
+    //         return{
+    //             qty : prevState.qty - 1
+    //         }
+    //     });
+    // }
+    //render(){
        // console.log("render");
-        console.log('this.props',this.props);
+        //console.log('this.props',this.props);
         // Using object destructuring
         // const {price, title, qty} = this.state;
         //const {price, title, qty} = this.props;
-        const {price, title, qty} = this.props.product;
-        const{product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props;
+        const {price, title, qty} = props.product;
+        const{product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = props;
         return(
             <div className = "cart-item">
-                {this.props.jsx}
+                {/* {this.props.jsx} */}
                 <div className = "left-block">
                     <img style = {styles.image} />
                 </div>
@@ -122,7 +125,6 @@ class CartItem extends React.Component{
                 </div>
             </div>
         );
-    }
 }
 
 const styles = {
