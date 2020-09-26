@@ -8,7 +8,7 @@ import React from 'react';
             <div style = {styles.nav}>
                 <div style = {styles.cartIconContainer}>
                     <img style = {styles.cartIcon} src = "https://www.flaticon.com/premium-icon/icons/svg/2042/2042549.svg" alt = "" />
-                    <span style = {styles.cartCount}>3</span>
+                    <span style = {styles.cartCount}>{props.count}</span>
                 </div>
             </div>
         );
