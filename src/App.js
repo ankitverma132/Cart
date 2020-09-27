@@ -82,11 +82,16 @@ class App extends React.Component {
   }
 
   getCartTotal = () => {
-    const {products} = this.state;
+    const { products } = this.state;
     let cartTotal = 0;
-    products.map((product) => {
-      cartTotal += product.qty * product.price;
-    })
+
+    products.map(product => {
+      if (product.qty > 0) {
+        cartTotal = cartTotal + product.qty * product.price;
+      }
+      return "";
+    });
+
     return cartTotal;
   }
 

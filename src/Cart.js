@@ -84,8 +84,8 @@ import CartItem from './CartItem';
                     return item + 5;
                 })} */}
                 {
-                    products.map((product) => {
-                        return(
+                    products.map((product) => (
+                        //return(
                          <CartItem 
                              product = {product} 
                              key = {product.id}
@@ -98,15 +98,14 @@ import CartItem from './CartItem';
                              //comp={<CartItem />}
                          />
                         )
-                    })
+                    )
                 }
                 {/* <CartItem qty={1} price={99} title={"watch"} img={""} /> */}
                 {/* <CartItem />
                 <CartItem /> */}
                 {/* CART */}
             </div>
-        );
-    
+        )
 }
 
 export default Cart; 
