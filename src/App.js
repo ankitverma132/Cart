@@ -40,14 +40,37 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    // //Using chaining of methods
+    // firebase
+    // .firestore()
+    // //Will return refernce to a collection
+    // .collection('products')
+    // //will execute query and return results as QueryShot
+    // .get()
+    // .then((snapshot) => {
+    //   console.log(snapshot);
+
+    //   snapshot.docs.map((doc) => {
+    //     console.log(doc.data());
+    //   });
+    //   const products = snapshot.docs.map((doc) => {
+    //     //It will return an object
+    //     //return doc.data();
+    //     const data = doc.data();
+    //     data['id'] = doc.id;
+    //     return data;
+    //   })
+    //   this.setState({
+    //     products : products,
+    //     loading : false
+    //   })
+    // }) 
     //Using chaining of methods
     firebase
     .firestore()
     //Will return refernce to a collection
     .collection('products')
-    //will execute query and return results as QueryShot
-    .get()
-    .then((snapshot) => {
+    .onSnapshot((snapshot) => {
       console.log(snapshot);
 
       snapshot.docs.map((doc) => {
@@ -64,7 +87,6 @@ class App extends React.Component {
         products : products,
         loading : false
       })
-
     }) 
   }
 
