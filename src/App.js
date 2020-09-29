@@ -37,6 +37,8 @@ class App extends React.Component {
       //Another way
       //this.increaseQuantity = this.increaseQuantity.bind(this);
     // this.testing();
+
+    this.db = firebase.firestore();
   }
 
   componentDidMount(){
@@ -66,8 +68,7 @@ class App extends React.Component {
     //   })
     // }) 
     //Using chaining of methods
-    firebase
-    .firestore()
+   this.db
     //Will return refernce to a collection
     .collection('products')
     .onSnapshot((snapshot) => {
@@ -150,6 +151,21 @@ class App extends React.Component {
     return cartTotal;
   }
 
+  addProduct = () => {
+    this.db
+    .collection('products')
+    //It will return an promise
+    .add({
+      img : '',
+      price : '900',
+      qty : 3,
+      title : 'Washing Machine'
+    })
+    .then((docRef) => {
+      console.log("Product has been added", docRef);
+    })
+  }
+
   render(){
     const {products, loading} = this.state;
     return (
@@ -158,6 +174,7 @@ class App extends React.Component {
         <Navbar 
           count = {this.getCartCount()}
         />
+        <button onClick = {this.addProduct} style = {{padding : 8, fontSize : 15}}>Add a product</button>
         <Cart 
          products = {products}  
          onIncreaseQuantity = {this.handleIncreaseQuantity}
