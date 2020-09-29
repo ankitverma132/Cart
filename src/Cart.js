@@ -88,6 +88,8 @@ import CartItem from './CartItem';
                         //return(
                          <CartItem 
                              product = {product} 
+                             //After adding firestore there is no product id
+                             //Need to add id
                              key = {product.id}
                              onIncreaseQuantity = {props.onIncreaseQuantity}
                              onDecreaseQuantity = {props.onDecreaseQuantity}
