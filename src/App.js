@@ -71,6 +71,7 @@ class App extends React.Component {
    this.db
     //Will return refernce to a collection
     .collection('products')
+    //Attaching listener
     .onSnapshot((snapshot) => {
       console.log(snapshot);
 
@@ -79,6 +80,7 @@ class App extends React.Component {
       });
       const products = snapshot.docs.map((doc) => {
         //It will return an object
+        //Filling product array
         //return doc.data();
         const data = doc.data();
         data['id'] = doc.id;
@@ -94,27 +96,59 @@ class App extends React.Component {
   //we will create a function and sent it as props and whenever qty will
   //change that func would be called and change state in cart component
   handleIncreaseQuantity = (product) => {
-      console.log('Hey plz increase quantity of', product);
+      //console.log('Hey plz increase quantity of', product);
       const {products} = this.state;
       //We need to get index of that product as we will change qty of that product only
       const index = products.indexOf(product);
-      products[index].qty += 1;
+      // products[index].qty += 1;
 
-      this.setState({
-          products : products
-          //we can also just write products
+      // this.setState({
+      //     products : products
+      //     //we can also just write products
+      // })
+
+      //Now we will increase qty in firebase that will trigger 
+      //listner onSnapshot and update the app.
+      //Will give refernce of that particular product
+      const docRef = this.db.collection('products').doc(products[index].id);
+
+      docRef
+      //Will update data and return an promise
+      .update({
+        qty : products[index].qty + 1
+      })
+      .then(() => {
+        console.log('Document updated successfully');
+      })
+      .catch((err) => {
+        console.log('Error',err);
       })
   }
+
   handleDecreaseQuantity = (product) => {
-      console.log('Hey plz decrease quantity of', product);
+      //console.log('Hey plz decrease quantity of', product);
       const {products} = this.state;
       //We need to get index of that product as we will change qty of that product only
       const index = products.indexOf(product);
-      products[index].qty -= 1;
+      // products[index].qty -= 1;
 
-      this.setState({
-          products : products
-          //we can also just write products
+      // this.setState({
+      //     products : products
+      //     //we can also just write products
+      // })
+
+      const docRef = this.db.collection('products').doc(products[index].id);
+
+      docRef
+      //Will update data and return an promise
+      .update({
+        qty : products[index].qty - 1
+      })
+      .then(() => {
+        console.log('Document updated successfully');
+      })
+      .catch((err) => {
+        console.log('Error',err);
       })
   }
 
@@ -174,7 +208,7 @@ class App extends React.Component {
         <Navbar 
           count = {this.getCartCount()}
         />
-        <button onClick = {this.addProduct} style = {{padding : 8, fontSize : 15}}>Add a product</button>
+        {/* <button onClick = {this.addProduct} style = {{padding : 8, fontSize : 15}}>Add a product</button> */}
         <Cart 
          products = {products}  
          onIncreaseQuantity = {this.handleIncreaseQuantity}
