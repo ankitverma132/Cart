@@ -71,6 +71,12 @@ class App extends React.Component {
    this.db
     //Will return refernce to a collection
     .collection('products')
+    //Query to get product where price is 300
+    //.where('price','==',300)
+    //To group queries
+    //.where('title','==','Mug')
+    //To sort data according to price
+    //.orderBy('price','desc')
     //Attaching listener
     .onSnapshot((snapshot) => {
       console.log(snapshot);
