@@ -107,8 +107,8 @@ class App extends React.Component {
       //     //we can also just write products
       // })
 
-      //Now we will increase qty in firebase that will trigger 
-      //listner onSnapshot and update the app.
+      //Now we will increase qty in firebase that will  
+      //trigger listner onSnapshot and update the app.
       //Will give refernce of that particular product
       const docRef = this.db.collection('products').doc(products[index].id);
 
@@ -156,10 +156,24 @@ class App extends React.Component {
       const {products} = this.state;
       //It will return an other array that will contain 
       //whose id is not equal to given id
-      const items = products.filter((item) => item.id !== id );
-      this.setState({
-          products : items,
+      // const items = products.filter((item) => item.id !== id );
+      // this.setState({
+      //     products : items,
+      // })
+
+      //We will get document refernce & delete that
+      const docRef = this.db.collection('products').doc(id);
+
+      docRef
+      //Will delete product and return an promise
+      .delete()
+      .then(() => {
+        console.log("Product deleted successfully");
       })
+      .catch((err) => {
+        console.log("Error",err);
+      })
+
   }
 
   getCartCount = () => {
